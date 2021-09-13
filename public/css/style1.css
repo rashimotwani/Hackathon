@@ -50,6 +50,17 @@ nav{
     margin-top: 1.5rem;
 }
 
+
+.container{
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+    width: 100%;
+}
+
+.cf{
+    margin: auto;
+}
+
 .video{
     height: 20rem;
     width: 23rem;
@@ -62,12 +73,15 @@ nav{
 }
 
 .name{
+    
+    width: 100%;
     margin: auto;
     padding-left: 0rem;
     padding-top: 4rem;
 }
 
 .heading{
+    background-color: var(--navigationbg);
     font-family: 'Lobster', cursive;
     font-size: 13rem;
     margin-left: -2rem;
