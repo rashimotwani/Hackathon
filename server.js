@@ -1,6 +1,5 @@
 //jshint esversion:6
 require('dotenv').config();
-const cron = require('node-cron');
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -10,15 +9,10 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
-const MongoClient = require("mongodb").MongoClient;
-const nodemailer = require('nodemailer');
-const axios = require('axios');
-const { response } = require('express');
-const { MongoNetworkTimeoutError } = require('mongodb');
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
     extended: true
@@ -33,9 +27,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.set("useCreateIndex", true);
-
+mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
     googleId: String,
@@ -46,56 +39,93 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
+
 const User = new mongoose.model("User", userSchema);
-
-
 var currentid = "";
 
 passport.use(User.createStrategy());
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
         done(err, user);
     });
 });
 
-
 passport.use(new GoogleStrategy({
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        // callbackURL: "https://obscure-everglades-41187.herokuapp.com/auth/google/clockin",
-
-        // callbackURL: "http://localhost:3003/auth/google/clockin",
-        callbackURL: "https://clockin-india.herokuapp.com/auth/google/clockin",
-        // callbackURL: "https://calm-sands-71759.herokuapp.com/auth/google/clockin",
-
-        userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
-        passReqToCallback: true,
-
-    },
-    function(req, accessToken, refreshToken, profile, cb) {
-
-
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:3003/auth/google/clockin",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+},
+    function (accessToken, refreshToken, profile, cb) {
         console.log(profile);
         currentid = profile.id;
-        req.session.new=profile.id;
-        req.session.email = profile.emails[0].value;
-        
-        User.findOrCreate({ username: profile.emails[0].value, googleId: profile.id, picture: profile.photos[0].value, fname: profile.displayName }, function(err, user) {
-            req.session.accessToken = accessToken;
-            req.session.refreshToken = refreshToken
+
+        User.findOrCreate({ username: profile.emails[0].value, googleId: profile.id, picture: profile.photos[0].value, fname: profile.displayName }, function (err, user) {
             return cb(err, user);
         });
     }
-    ));
+));
 
 
-    app.listen( 3003, () => {
-        console.log('CONNECTION ESTABLISHED ON PORT 3003')
+
+app.route("/")
+    .get((req, res) => {
+        res.render('home');
+    });
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', "email"] }));
+
+app.get("/auth/google/clockin",
+    passport.authenticate('google', { failureRedirect: "/" }),
+    function (req, res) {
+        res.redirect("/calendar");
     });
 
 
+app.get("/calendar", function (req, res) {
+
+
+
+    //     User.findOne({ "secret": { $ne: null } }, function (err, foundUsers) {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             if (foundUsers) {
+    // res.render("calendar", { usersWithSecrets: foundUsers });
+    // res.render("calendar");
+    //             }
+    //         }
+    //     });
+    // }
+
+    if (req.isAuthenticated()) {
+        User.findOne({ googleId: currentid }, function (err, foundUser) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (foundUser) {
+                    foundUser.toObject();
+                    // console.log("heloooooooooo" + foundUser.fname)
+                    res.render("calendar", { idpic: foundUser.picture, idname: foundUser.fname });
+                }
+            }
+        });
+    }
+    else {
+    res.redirect('/');
+    }
+});
+
+
+
+
+
+app.listen(3003, () => {
+    console.log('CONNECTION ESTABLISHED ON PORT 3003')
+});
