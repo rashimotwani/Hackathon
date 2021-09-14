@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "- [Divnoor Kaur](https://github.com/Noor-02)\r - [Harsh Verma](https://github.com/v-harsh-18)\r - [Rashi Motwani](https://github.com/rashimotwani)\r - [Vanshika Tibrewal](https://github.com/vanshikaT2)",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

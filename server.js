@@ -1,22 +1,21 @@
 //jshint esversion:6
-require('dotenv').config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const ejs = require("ejs");
-const mongoose = require("mongoose");
-const session = require('express-session');
-const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const findOrCreate = require('mongoose-findorcreate');
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
-const request = require("request");
-const axios = require('axios');
+import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import bodyParser from "body-parser";
+import ejs from "ejs";
+import mongoose from "mongoose";
+import session from 'express-session';
+import passport from "passport";
+import passportLocalMongoose from "passport-local-mongoose";
+import GoogleStrategy from 'passport-google-oauth20';
+GoogleStrategy.Strategy
+import findOrCreate from 'mongoose-findorcreate';
+import jwt from "jsonwebtoken";
+import cors from "cors";
+import request from "node-fetch";
 
 const app = express();
-// var fetch = require("node-fetch");
-let fs = require("fs");
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -35,7 +34,6 @@ app.use(passport.session());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 
 mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -90,6 +88,8 @@ app.get("/get-token", (req, res) => {
     apikey: API_KEY,
   };
   const token = jwt.sign(payload, SECRET_KEY, options);
+  console.log(token);
+  req.session.token=token;
   res.json({ token });
 });
 
@@ -112,16 +112,31 @@ app.get("/auth/google/chillflix",
 
 app.route("/main")
 .get((req, res) => {
+  const API_KEY = process.env.ZUJONOW_API_KEY;
+  const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
+  const option = { expiresIn: "10m", algorithm: "HS256" };
+  const payload = {
+    apikey: API_KEY,
+  };
+  let token = jwt.sign(payload, SECRET_KEY, option);
+
+  console.log(token);
+
+  const url = "https://api.zujonow.com/v1/meetings";
+
+  var options = {
+    method: "POST",
+    headers: {
+      Authorization: `${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
   
-  
-  const headers = {
-    'Authorization': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJmYzU5YjUzNi04YzJjLTQ5YzgtYTY3OS1kNDM1YjY1ZDgzYTYiLCJpYXQiOjE2MzE2MjIyNjUsImV4cCI6MTYzMTYyMjg2NX0.CcdqXMFilHZ92Jm26wfBut1ND6PuVqXgBoN7llgdj5o`,
-    'Accept': "application/json",
-    "Content-Type": "application/json",
-  }
-  
-  axios.post('https://api.zujonow.com/v1/meetings',{ headers })
-  .then(response => console.log(response));
+  request(url, options)
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
   
   res.render('main')
 });
