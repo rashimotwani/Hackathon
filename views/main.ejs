@@ -11,9 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="img/Copy of C.png"/>
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
-<link rel="stylesheet" href="css/darkmode.css">
+
+
 <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/r1style1.css" />
 <link rel="stylesheet" media="screen and (min-width:601px)" href="css/r2style1.css" />
 <link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style2.css" />
@@ -21,37 +21,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="css/darkmode.css">
 </head>
 
 <body data-theme = "dark"   id="HTML" onload="changing()">
-    <nav class="shadow bg-body rounded">
-        <div class="logo">
-            <img id="logo2" class="logo2" src="img/lightmode_logo.png">
-        </div>
-    </div>
-
-    <div class="button" class="btn-dark btn btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <a class="btn-dark btn btn-lg" href="/" role="button">
-            <i class="fab fa-google"></i>
-            SIGN OUT
-        </a>
-    </div>
-
-
-    <div class="button" class="btn-dark btn btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <a class="btn-dark btn btn-lg" href="/meet" role="button">
-            Create Meet
-        </a>
-    </div>
-
-
-
-    </nav>
-
-    <div class="container">
-        heloooo
-    </div>
+    
+    <%-include("components/navbar")-%>
+     
 
     <footer class="shadow foot">
         <div class="logo">
