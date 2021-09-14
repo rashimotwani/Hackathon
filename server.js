@@ -12,9 +12,10 @@ const findOrCreate = require('mongoose-findorcreate');
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const request = require("request");
+const axios = require('axios');
 
 const app = express();
-var fetch = require("node-fetch");
+// var fetch = require("node-fetch");
 let fs = require("fs");
 
 app.use(express.static("public"));
@@ -36,13 +37,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-const token = jwt.sign(
-    { user_id: user._id, email },
-    process.env.TOKEN_KEY,
-    {
-      expiresIn: "2h",
-    }
-  );
 
 mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true, useUnifiedTopology: true });
 // mongoose.set("useCreateIndex", true);
@@ -98,64 +92,11 @@ app.get("/get-token", (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, options);
   res.json({ token });
 });
-const url = "https://api.zujonow.com/v1/files";
-var options = {
-  method: "POST",
-  headers: {
-    Authorization: `${YOUR_JWT_TOKEN}`,
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-};
 
-fetch(url, options)
-  .then((res) => res.json())
-  .then((json) => console.log(json))
-  .catch((err) => console.error("error:" + err));
-
-  const formData = new FormData();
-formData.append("file", fs.createReadStream("video/mock-video.mp4"));
-
-
-  const URL = "https://storage-api.zujonow.com/v1/files";
-  var options4 = {
-    method: "POST",
-    headers: {
-      Authorization: `${YOUR_JWT_TOKEN}`,
-    },
-    body: formData,
-  };
-  
-  fetch(URL, options4)
-    .then((res) => res.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error("error:" + err));
-
-    const Url = "https://api.zujonow.com/v1/files/?page=1&perPage=20";
-const options1 = {
-  method: "GET",
-  headers: { Accept: "application/json", Authorization: `jwt token goes here` },
-};
-
-fetch(Url, options1)
-  .then((res) => res.json())
-  .then((json) => console.log(json))
-  .catch((err) => console.error("error:" + err));
-
-  const url1 = "https://api.zujonow.com/v1/files/${id}";
-const options2 = {
-  method: "GET",
-  headers: { Accept: "application/json", Authorization: `jwt token goes here` },
-};
-
-fetch(url1, options2)
-  .then((res) => res.json())
-  .then((json) => console.log(json))
-  .catch((err) => console.error("error:" + err));
 
   app.route("/")
     .get((req, res) => {
-        res.render('home');
+         res.render('home');
     });
 
 
@@ -171,21 +112,18 @@ app.get("/auth/google/chillflix",
 
 app.route("/main")
 .get((req, res) => {
-    res.render('main')
-    var request = require("node-fetch");
-
-var options3 = {
-  method: "POST",
-  url: "https://api.zujonow.com/v1/meetings",
-  headers: { authorization: `${YOUR_JWT_TOKEN}` },
-};
-
-request(options3, function (error, response, body) {
-  if (error) throw new Error(error);
-
-  console.log(body);
-});;
-
+  
+  
+  const headers = {
+    'Authorization': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJmYzU5YjUzNi04YzJjLTQ5YzgtYTY3OS1kNDM1YjY1ZDgzYTYiLCJpYXQiOjE2MzE2MjIyNjUsImV4cCI6MTYzMTYyMjg2NX0.CcdqXMFilHZ92Jm26wfBut1ND6PuVqXgBoN7llgdj5o`,
+    'Accept': "application/json",
+    "Content-Type": "application/json",
+  }
+  
+  axios.post('https://api.zujonow.com/v1/meetings',{ headers })
+  .then(response => console.log(response));
+  
+  res.render('main')
 });
 
 
