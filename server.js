@@ -111,8 +111,13 @@ app.get("/auth/google/chillflix",
         res.redirect("/main");
     });
 
-
 app.route("/main")
+.get((req, res) => {
+  res.render('main');
+});
+
+
+app.route("/video")
 .get((req, res) => {
   const API_KEY = process.env.ZUJONOW_API_KEY;
   const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
@@ -139,7 +144,7 @@ request(url, options)
   .then((res) => res.json())
   .then((json) => console.log(json))
   .catch((err) => console.error("error:" + err));
-  res.render('main')
+  res.redirect("/main")
 
 
   const url2 = "https://api.zujonow.com/v1/files/?page=1&perPage=20";
@@ -179,11 +184,16 @@ app.route("/meet")
   };
   
   request(url, options)
-    .then((res) => res.json())
-    .then((json) => console.log(json))
+    .then((res) => {
+      res.json()})
+    .then((json) => {
+      console.log(json)})
     .catch((err) => console.error("error:" + err));
+
+    console.log(vid)
+    
   
-  res.render('main')
+  res.redirect("/main")
 });
 
 
