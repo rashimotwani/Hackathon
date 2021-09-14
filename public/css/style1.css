@@ -11,6 +11,7 @@ nav{
     position: fixed;
     width: 100%;
     margin-top: 0px;
+    
 }
 
 .modal-backdrop {
@@ -51,14 +52,18 @@ nav{
 }
 
 
-.container{
+.panel0{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height:44rem ;
     background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-}
-
-.cf{
-    margin: auto;
+    margin: 0px;
+    padding-top: 34px;
+    text-align: center;
 }
 
 .video{
@@ -73,7 +78,6 @@ nav{
 }
 
 .name{
-    
     width: 100%;
     margin: auto;
     padding-left: 0rem;
@@ -84,18 +88,13 @@ nav{
     background-color: var(--navigationbg);
     font-family: 'Lobster', cursive;
     font-size: 13rem;
-    margin-left: -2rem;
+    margin: 0 auto;
     display: inline-block;
     color:var(--clocktext)!important;
 }
 
 .In{
     color: var(--intext)!important;
-}
-
-.row{
-    margin-top: 0px;
-    padding-top: 130px;
 }
 
 .panel1{
@@ -286,7 +285,5 @@ body[data-theme='dark'] {
     transition: background-color 0.3s ease, color 1s ease;
   }
 
-  .container{
-      padding-top: 0;
-  }
+  
   
