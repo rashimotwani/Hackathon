@@ -112,6 +112,37 @@ app.get("/auth/google/chillflix",
 
 app.route("/main")
 .get((req, res) => {
+//   const API_KEY = process.env.ZUJONOW_API_KEY;
+//   const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
+//   const option = { expiresIn: "10m", algorithm: "HS256" };
+//   const payload = {
+//     apikey: API_KEY,
+//   };
+//   let token = jwt.sign(payload, SECRET_KEY, option);
+
+//   console.log(token);
+
+//   const url = "https://api.zujonow.com/v1/meetings";
+
+//   var options = {
+//     method: "POST",
+//     headers: {
+//       Authorization: `${token}`,
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//   };
+  
+//   request(url, options)
+//     .then((res) => res.json())
+//     .then((json) => console.log(json))
+//     .catch((err) => console.error("error:" + err));
+  
+  res.render('main')
+});
+
+app.route("/meet")
+.get((req, res) => {
   const API_KEY = process.env.ZUJONOW_API_KEY;
   const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
   const option = { expiresIn: "10m", algorithm: "HS256" };
@@ -140,6 +171,7 @@ app.route("/main")
   
   res.render('main')
 });
+
 
 
 
