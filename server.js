@@ -9,8 +9,13 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const request = require("request");
 
 const app = express();
+var fetch = require("node-fetch");
+let fs = require("fs");
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -26,6 +31,18 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+const token = jwt.sign(
+    { user_id: user._id, email },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
 
 mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true, useUnifiedTopology: true });
 // mongoose.set("useCreateIndex", true);
@@ -71,12 +88,76 @@ passport.use(new GoogleStrategy({
     }
 ));
 
+app.get("/get-token", (req, res) => {
+  const API_KEY = process.env.ZUJONOW_API_KEY;
+  const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
+  const options = { expiresIn: "10m", algorithm: "HS256" };
+  const payload = {
+    apikey: API_KEY,
+  };
+  const token = jwt.sign(payload, SECRET_KEY, options);
+  res.json({ token });
+});
+const url = "https://api.zujonow.com/v1/files";
+var options = {
+  method: "POST",
+  headers: {
+    Authorization: `${YOUR_JWT_TOKEN}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
+
+fetch(url, options)
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+  .catch((err) => console.error("error:" + err));
+
+  const formData = new FormData();
+formData.append("file", fs.createReadStream("video/mock-video.mp4"));
 
 
-app.route("/")
+  const URL = "https://storage-api.zujonow.com/v1/files";
+  var options4 = {
+    method: "POST",
+    headers: {
+      Authorization: `${YOUR_JWT_TOKEN}`,
+    },
+    body: formData,
+  };
+  
+  fetch(URL, options4)
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
+
+    const Url = "https://api.zujonow.com/v1/files/?page=1&perPage=20";
+const options1 = {
+  method: "GET",
+  headers: { Accept: "application/json", Authorization: `jwt token goes here` },
+};
+
+fetch(Url, options1)
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+  .catch((err) => console.error("error:" + err));
+
+  const url1 = "https://api.zujonow.com/v1/files/${id}";
+const options2 = {
+  method: "GET",
+  headers: { Accept: "application/json", Authorization: `jwt token goes here` },
+};
+
+fetch(url1, options2)
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+  .catch((err) => console.error("error:" + err));
+
+  app.route("/")
     .get((req, res) => {
         res.render('home');
     });
+
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', "email"] }));
@@ -84,44 +165,28 @@ app.get('/auth/google',
 app.get("/auth/google/chillflix",
     passport.authenticate('google', { failureRedirect: "/" }),
     function (req, res) {
-        res.redirect("/");
+        res.redirect("/main");
     });
 
 
-// app.get("/calendar", function (req, res) {
+app.route("/main")
+.get((req, res) => {
+    res.render('main')
+    var request = require("node-fetch");
 
+var options3 = {
+  method: "POST",
+  url: "https://api.zujonow.com/v1/meetings",
+  headers: { authorization: `${YOUR_JWT_TOKEN}` },
+};
 
+request(options3, function (error, response, body) {
+  if (error) throw new Error(error);
 
-//     //     User.findOne({ "secret": { $ne: null } }, function (err, foundUsers) {
-//     //         if (err) {
-//     //             console.log(err);
-//     //         } else {
-//     //             if (foundUsers) {
-//     // res.render("calendar", { usersWithSecrets: foundUsers });
-//     // res.render("calendar");
-//     //             }
-//     //         }
-//     //     });
-//     // }
+  console.log(body);
+});;
 
-//     if (req.isAuthenticated()) {
-//         User.findOne({ googleId: currentid }, function (err, foundUser) {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 if (foundUser) {
-//                     foundUser.toObject();
-//                     // console.log("heloooooooooo" + foundUser.fname)
-//                     res.render("calendar", { idpic: foundUser.picture, idname: foundUser.fname });
-//                 }
-//             }
-//         });
-//     }
-//     else {
-//     res.redirect('/');
-//     }
-// });
-
+});
 
 
 

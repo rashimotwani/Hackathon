@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" href="img/Copy of C.png"/>
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
 <link rel="stylesheet" href="css/darkmode.css">
-<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/r1style1.css" />
-<link rel="stylesheet" media="screen and (min-width:601px)" href="css/r2style1.css" />
+<!-- <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/r1style1.css" /> -->
+<!-- <link rel="stylesheet" media="screen and (min-width:601px)" href="css/r2style1.css" /> -->
 <link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style1.css" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
 
 </head>
 
-<body data-theme = "light"   id="HTML" onload="changing()">
+<body data-theme = "dark"   id="HTML" onload="changing()">
     <nav class="shadow bg-body rounded">
         <div class="logo">
             <img id="logo2" class="logo2" src="img/lightmode_logo.png">
@@ -123,60 +123,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+    <script src="js/darkmode.js"></script>
 
-    <script>
-        let theme = localStorage.getItem('data-theme');
-const changeThemeToDark = () => {
-    document.getElementById("HTML").setAttribute("data-theme", "dark") // set theme to dark
-    localStorage.setItem("data-theme", "dark") // save theme to local storage
-    var image = document.getElementById('logo2');
-    image.src = "img/Darkmode_logo.png";
-    var image = document.getElementById('logo-foot');
-    image.src = "img/Darkmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logo-dark-vid.mp4";
-}
-
-const changeThemeToLight = () => {
-    document.getElementById("HTML").setAttribute("data-theme", "light") // set theme light
-    localStorage.setItem("data-theme", 'light') // save theme to local storage
-    var image = document.getElementById('logo2');
-    image.src = "img/lightmode_logo.png";
-    var image = document.getElementById('logo-foot');
-    image.src = "img/lightmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logoFinal.mp4";
-}
-
-
-const checkbox = document.getElementById("checkbox");
-checkbox.addEventListener('change', () => {
-    let theme = localStorage.getItem('data-theme'); // Retrieve saved them from local storage
-    if (theme ==='dark'){
-        changeThemeToLight()
-    }else{
-        changeThemeToDark()
-    }   
-});
-
-function changing(){
-    document.getElementById("HTML").setAttribute("data-theme", localStorage.getItem('data-theme')) ;
-    if(localStorage.getItem('data-theme')==="dark")
-    {
-        var image = document.getElementById('logo2');
-    image.src = "img/Darkmode_logo.png";
-    var image = document.getElementById('logo-foot');
-    image.src = "img/Darkmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logo-dark-vid.mp4";
-    document.getElementById("checkbox").checked = true;
-    }
-    else if(localStorage.getItem('data-theme')===null)
-    {
-        document.getElementById("HTML").setAttribute("data-theme", "light") ;
-    }
-}
-    </script>
+    
 </body>
 
 
