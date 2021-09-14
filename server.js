@@ -142,7 +142,7 @@ var options = {
 
 request(url, options)
   .then((res) => res.json())
-  .then((json) => console.log(json.data[0].fileUrl))
+  .then((json) => console.log(json))
   .catch((err) => console.error("error:" + err));
   res.redirect("/main")
 
@@ -155,7 +155,7 @@ request(url, options)
   
   request(url2, options2)
     .then((res) => res.json())
-    .then((json) => console.log(json))
+    .then((json) => console.log(json.data[0].fileUrl))
     .catch((err) => console.error("error:" + err));
 });
 
