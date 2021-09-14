@@ -189,8 +189,6 @@ app.route("/meet")
     .then((json) => {
       console.log(json)})
     .catch((err) => console.error("error:" + err));
-
-    console.log(vid)
     
   
   res.redirect("/main")
