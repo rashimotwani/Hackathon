@@ -14,6 +14,8 @@ import findOrCreate from 'mongoose-findorcreate';
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import request from "node-fetch";
+import fs from "fs";
+import FormData from "form-data";
 
 const app = express();
 
@@ -112,34 +114,46 @@ app.get("/auth/google/chillflix",
 
 app.route("/main")
 .get((req, res) => {
-//   const API_KEY = process.env.ZUJONOW_API_KEY;
-//   const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
-//   const option = { expiresIn: "10m", algorithm: "HS256" };
-//   const payload = {
-//     apikey: API_KEY,
-//   };
-//   let token = jwt.sign(payload, SECRET_KEY, option);
+  const API_KEY = process.env.ZUJONOW_API_KEY;
+  const SECRET_KEY = process.env.ZUJONOW_SECRET_KEY;
+  const option = { expiresIn: "10m", algorithm: "HS256" };
+  const payload = {
+    apikey: API_KEY,
+  };
+  let token = jwt.sign(payload, SECRET_KEY, option);
 
-//   console.log(token);
 
-//   const url = "https://api.zujonow.com/v1/meetings";
+const formData = new FormData();
+formData.append("file", fs.createReadStream("mock-video.mp4"));
 
-//   var options = {
-//     method: "POST",
-//     headers: {
-//       Authorization: `${token}`,
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//   };
-  
-//   request(url, options)
-//     .then((res) => res.json())
-//     .then((json) => console.log(json))
-//     .catch((err) => console.error("error:" + err));
-  
+const url = "https://storage-api.zujonow.com/v1/files";
+var options = {
+  method: "POST",
+  headers: {
+    Authorization: `${token}`,
+  },
+  body: formData,
+};
+
+request(url, options)
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+  .catch((err) => console.error("error:" + err));
   res.render('main')
+
+
+  const url2 = "https://api.zujonow.com/v1/files/?page=1&perPage=20";
+  const options2 = {
+    method: "GET",
+    headers: { Accept: "application/json", Authorization: `${token}` },
+  };
+  
+  request(url2, options2)
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
 });
+
 
 app.route("/meet")
 .get((req, res) => {
