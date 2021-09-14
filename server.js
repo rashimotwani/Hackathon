@@ -58,7 +58,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3003/auth/google/clockin",
+    callbackURL: "http://localhost:3003/auth/google/chillflix",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -81,46 +81,46 @@ app.route("/")
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', "email"] }));
 
-app.get("/auth/google/clockin",
+app.get("/auth/google/chillflix",
     passport.authenticate('google', { failureRedirect: "/" }),
     function (req, res) {
-        res.redirect("/calendar");
+        res.redirect("/");
     });
 
 
-app.get("/calendar", function (req, res) {
+// app.get("/calendar", function (req, res) {
 
 
 
-    //     User.findOne({ "secret": { $ne: null } }, function (err, foundUsers) {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             if (foundUsers) {
-    // res.render("calendar", { usersWithSecrets: foundUsers });
-    // res.render("calendar");
-    //             }
-    //         }
-    //     });
-    // }
+//     //     User.findOne({ "secret": { $ne: null } }, function (err, foundUsers) {
+//     //         if (err) {
+//     //             console.log(err);
+//     //         } else {
+//     //             if (foundUsers) {
+//     // res.render("calendar", { usersWithSecrets: foundUsers });
+//     // res.render("calendar");
+//     //             }
+//     //         }
+//     //     });
+//     // }
 
-    if (req.isAuthenticated()) {
-        User.findOne({ googleId: currentid }, function (err, foundUser) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (foundUser) {
-                    foundUser.toObject();
-                    // console.log("heloooooooooo" + foundUser.fname)
-                    res.render("calendar", { idpic: foundUser.picture, idname: foundUser.fname });
-                }
-            }
-        });
-    }
-    else {
-    res.redirect('/');
-    }
-});
+//     if (req.isAuthenticated()) {
+//         User.findOne({ googleId: currentid }, function (err, foundUser) {
+//             if (err) {
+//                 console.log(err);
+//             } else {
+//                 if (foundUser) {
+//                     foundUser.toObject();
+//                     // console.log("heloooooooooo" + foundUser.fname)
+//                     res.render("calendar", { idpic: foundUser.picture, idname: foundUser.fname });
+//                 }
+//             }
+//         });
+//     }
+//     else {
+//     res.redirect('/');
+//     }
+// });
 
 
 
