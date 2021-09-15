@@ -241,6 +241,15 @@ request(url, options)
 
 });
 
+app.route("/livevideo")
+.post((req, res) => {
+
+  let key="https://live.zujonow.com/live/"+req.body.key+"/index.m3u8";
+
+  res.render('livevideo',{key:key});
+});
+
+
 
 
 
