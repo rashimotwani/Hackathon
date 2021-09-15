@@ -11,6 +11,7 @@ nav{
     position: fixed;
     width: 100%;
     margin-top: 0px;
+    z-index: 400;
     
 }
 .sign_out{
@@ -19,11 +20,10 @@ nav{
     margin-top: 1.5rem;
 }
 .livelogo{
-    height: 23px;
-    width: 27px;
-    fill: white;
-    margin-right: 5px;
-    margin-bottom: 2px;
+    height: 100px;
+    width: 100px;
+    fill: var(--clocktext);
+    margin: auto ;
 }
 .modal-backdrop {
     position: relative;
@@ -33,6 +33,14 @@ nav{
     width: 100vw;
     height: 100vh;
     background-color:#000000;
+}
+
+.container{
+    display: flex;
+    z-index: -4;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .shadow {
@@ -106,6 +114,24 @@ nav{
 
 .In{
     color: var(--intext)!important;
+}
+
+.card{
+    margin-top: 10rem;
+    background-color: var(--card);
+    color: var(--clocktext);
+    text-align: center;
+    margin-right: 0px;
+    
+}
+
+.col-12{
+    display: flex;
+    justify-content: center;
+}
+
+.card2{
+    margin-top: 2rem;
 }
 
 .panel1{
@@ -229,6 +255,24 @@ nav{
 
 }
 
+.lbtn{
+    background-color: var(--lbtn);
+    color: white;
+}
+
+.lbtn:hover{
+    color: grey;
+}
+
+.row{
+    justify-content: center;
+}
+
+
+#hidden{
+    display: none;
+}
+
 footer{
     height:4.5rem;
     width:100%;
@@ -275,6 +319,7 @@ footer{
     --lightgrey: grey ;
     --lsblack: rgba(0,0,0,0.15);
     --dswhite:rgba(255, 245, 245, 0.15);
+    --cgrey: #212529;
      
 }
 
@@ -286,6 +331,8 @@ body[data-theme='light'] {
     --ftext: var(--black);
     --copyright: var(--black);
     --ldshadow: var(--lsblack);
+    --card: var(--white);
+    --lbtn: var(--cgrey);
 }
 
 body[data-theme='dark'] {
@@ -296,6 +343,8 @@ body[data-theme='dark'] {
     --ftext: var(--white);
     --copyright: var(--lightgrey);
     --ldshadow: var(--dswhite);
+    --card: var(--cgrey);
+    --lbtn: var(--dswhite);
 }
 
 * {

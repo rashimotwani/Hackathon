@@ -196,6 +196,8 @@ app.route("/meet")
   res.redirect("/main")
 });
 
+var a;
+var b;
 
 app.route("/livestream")
 .get((req, res) => {
@@ -231,10 +233,11 @@ request(url, options)
   .then((json) => {
     console.log(json.upstreamUrl);
     console.log(json.streamKey)
+    res.render("livestream", { Url: json.upstreamUrl, Key: json.streamKey})
   })
+  
   .catch((err) => console.error("error:" + err));
-
-  res.render("livestream")
+  
 
 });
 

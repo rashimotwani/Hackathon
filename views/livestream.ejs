@@ -70,6 +70,42 @@
       </p>
     </video> -->
 
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card" style="width: 72rem;">
+            <svg xmlns="http://www.w3.org/2000/svg"  class="bi bi-broadcast livelogo" viewBox="0 0 16 16">
+              <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+            </svg>
+            <i class="bi bi-broadcast"></i>
+            <div class="card-body">
+              <h5 class="card-title">Happy Streaming !</h5>
+              <div id="hidden">
+               <p><b>URL:</b> <%= Url %></p>
+               <p><b>KEY:</b> <%= Key %></p>
+               
+               <div>
+                 <p>1. Download the desktop app from <a href="https://obsproject.com/" target="_blank">here</a></p>
+                 <p>2. Copy and paste the above URL and KEY there.</p>
+                 <p>3. Share the KEY with your friends.</p>
+               </div>
+              </div>
+              <a href="#" class="lbtn btn btn-lg" id="hiding" >Create Livestream</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card card2" style="width: 72rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="lbtn btn btn-lg">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <footer class="shadow foot">
       <div class="logo">
           <img class="logo-foot" id="logo-foot" src="img/lightmode_logo.png">
@@ -97,6 +133,13 @@
       };
     </script>
      <script src="js/darkmode.js"></script>
+
+     <script>
+       
+        document.getElementById("hiding").addEventListener("click", function() {
+       document.getElementById("hidden").style.display = "block";
+       });
+     </script>
 
   </body>
   </html>
