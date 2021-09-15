@@ -51,42 +51,6 @@ nav{
     margin-top: 1.5rem;
 }
 
-.sign_out{
-    float: right;
-    margin-right: 2rem;
-    margin-top: 1.5rem;
-}
-
-.meet{
-    float: right;
-    margin-right: 4.5rem;
-    margin-top: 1.5rem;
-}
-
-.meetlogo{
-    height: 23px;
-    width: 27px;
-    fill: white;
-    margin-right: 5px;
-    margin-bottom: 2px;
-}
-
-.livelogo{
-    height: 23px;
-    width: 27px;
-    fill: white;
-    margin-right: 5px;
-    margin-bottom: 2px;
-}
-
-.carouselling{
-    padding-top: 8rem;
-}
-
-.imging{
-   margin: auto;
-   height: 30rem;
-}
 
 .panel0{
     display: flex;
@@ -289,17 +253,6 @@ footer{
     margin-top: 1rem;
     margin-left: 1.5rem;
     color: var(--copyright);
-}
-
-.c1{
-    z-index: 10;
-}
-.c2{
-    z-index: 500;
-}
- 
-nav{
-    z-index:10000;
 }
 
 :root{

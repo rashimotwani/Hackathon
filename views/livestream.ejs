@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/r1style1.css" />
 <link rel="stylesheet" media="screen and (min-width:601px)" href="css/r2style1.css" />
-<link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style2.css" />
+<link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style3.css" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,25 @@
 
 <body data-theme = "dark"   id="HTML" onload="changing()">
     
-    <%-include("components/navbar")-%>
+  <nav class="shadow bg-body rounded">
+    <div class="logo">
+        <img id="logo2" class="logo2" src="img/lightmode_logo.png">
+    </div>
+
+
+
+
+<div class="button" class="btn-dark btn btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <a class="btn-dark btn btn-lg" href="/auth/google" role="button">
+        <i class="fab fa-google"></i>
+        SIGN IN
+    </a>
+</div>
+
+
+
+</nav>
+
     <video
       id="my-video"
       class="video-js"
@@ -48,6 +66,23 @@
         >
       </p>
     </video>
+
+    <footer class="shadow foot">
+      <div class="logo">
+          <img class="logo-foot" id="logo-foot" src="img/lightmode_logo.png">
+      </div>
+      <div class="text-foot">Try ChillFlix now</div>
+      <p class="copyright">&copy; copyright 2021 ChillFlix</p>
+      <div class="switch position" >
+          <input  type="checkbox" class="darking" id="checkbox">
+          <label for="checkbox" class="label">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+              <div class="ball"></div>
+          </label>
+      </div>
+
+  </footer>
     <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
     <script>
       videojs.Hls.xhr.beforeRequest = (options) => {
@@ -58,5 +93,7 @@
         return options;
       };
     </script>
+     <script src="js/darkmode.js"></script>
+
   </body>
   </html>
