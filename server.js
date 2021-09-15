@@ -16,6 +16,8 @@ import cors from "cors";
 import request from "node-fetch";
 import fs from "fs";
 import FormData from "form-data";
+import openurl from "openurl";
+import open from "open";
 
 const app = express();
 
@@ -144,6 +146,7 @@ request(url, options)
   .then((res) => res.json())
   .then((json) => console.log(json))
   .catch((err) => console.error("error:" + err));
+
   res.redirect("/main")
 
 
@@ -151,12 +154,15 @@ request(url, options)
   const options2 = {
     method: "GET",
     headers: { Accept: "application/json", Authorization: `${token}` },
+    redirect: 'follow'
   };
   
   request(url2, options2)
     .then((res) => res.json())
-    .then((json) => console.log(json.data[0].fileUrl))
+    .then((json) => { let url = json.data[0].fileUrl;
+      open(url)})
     .catch((err) => console.error("error:" + err));
+ 
 });
 
 

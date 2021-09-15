@@ -35,6 +35,8 @@
     "node-fetch": "^3.0.0",
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
+    "open": "^8.2.1",
+    "openurl": "^1.1.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
