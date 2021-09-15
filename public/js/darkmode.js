@@ -7,19 +7,15 @@ const changeThemeToDark = () => {
     image.src = "img/Darkmode_logo.png";
     var image = document.getElementById('logo-foot');
     image.src = "img/Darkmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logo-dark-vid.mp4";
 }
 
 const changeThemeToLight = () => {
     document.getElementById("HTML").setAttribute("data-theme", "light") // set theme light
     localStorage.setItem("data-theme", 'light') // save theme to local storage
     var image = document.getElementById('logo2');
-    image.src = "img/lightmode_logo.png";
+    image.src = "img/Lightmode_logo.png";
     var image = document.getElementById('logo-foot');
-    image.src = "img/lightmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logoFinal.mp4";
+    image.src = "img/Lightmode_logo.png";
 }
 
 
@@ -41,8 +37,6 @@ function changing(){
     image.src = "img/Darkmode_logo.png";
     var image = document.getElementById('logo-foot');
     image.src = "img/Darkmode_logo.png";
-    var video = document.getElementById('video-dark');
-    video.src = "video/logo-dark-vid.mp4";
     document.getElementById("checkbox").checked = true;
     }
     else if(localStorage.getItem('data-theme')===null)
