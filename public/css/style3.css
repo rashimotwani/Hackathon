@@ -13,7 +13,18 @@ nav{
     margin-top: 0px;
     
 }
-
+.sign_out{
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1.5rem;
+}
+.livelogo{
+    height: 23px;
+    width: 27px;
+    fill: white;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
 .modal-backdrop {
     position: relative;
     top: 0;

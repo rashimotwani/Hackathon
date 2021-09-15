@@ -196,6 +196,7 @@ app.route("/meet")
   res.redirect("/main")
 });
 
+
 app.route("/livestream")
 .get((req, res) => {
   const API_KEY = process.env.ZUJONOW_API_KEY;
@@ -233,8 +234,8 @@ request(url, options)
   })
   .catch((err) => console.error("error:" + err));
 
-  
   res.render("livestream")
+
 });
 
 
