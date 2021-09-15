@@ -25,8 +25,45 @@
 </head>
 
 <body data-theme = "dark"   id="HTML" onload="changing()">
+
+  <head>
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+  </head>
+  <body>
+    <video
+      id="my-video"
+      class="video-js"
+      controls
+      preload="auto"
+      width="640"
+      height="264"
+      data-setup="{}"
+    >
+      <source
+        src=<%=key%>
+        type="application/x-mpegURL"
+      />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank"
+          >supports HTML5 video</a
+        >
+      </p>
+    </video>
+    <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+    <script>
+      videojs.Hls.xhr.beforeRequest = (options) => {
+        options.headers = {
+          ...options.headers,
+          Authorization: "`token` generated in step 1",
+        };
+        return options;
+      };
+    </script>
+  </body>
     
-  <!-- <nav class="shadow bg-body rounded">
+  <nav class="shadow bg-body rounded">
     <div class="logo">
         <img id="logo2" class="logo2" src="img/lightmode_logo.png">
     </div>
@@ -43,35 +80,5 @@
 
 
 
-</nav> -->
-<div>
- 
-</div>
-
-    <video
-      id="my-video"
-      class="video-js"
-      controls
-      preload="auto"
-      width="640"
-      height="264"
-      data-setup="{}"
-    >
-      <source
-        src="<%=key%>"
-        type="application/x-mpegURL"
-      />
-
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a
-        web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank"
-          >supports HTML5 video</a
-        >
-      </p>
-
-      
-    </video> 
-
-  </body>
-  </html>
+</nav>
+</html>
