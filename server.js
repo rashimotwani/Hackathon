@@ -72,7 +72,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "https://chillflix-india.herokuapp.com/auth/google/chillflix",
-    callbackURL: "http://localhost:3003/auth/google/chillflix",
+    // callbackURL: "http://localhost:3003/auth/google/chillflix",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
     function (accessToken, refreshToken, profile, cb) {
