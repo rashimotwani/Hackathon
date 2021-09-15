@@ -40,7 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true });
 // mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
@@ -249,11 +249,6 @@ app.route("/livevideo")
   res.render('livevideo',{key:key});
 });
 
-
-
-
-
-
-app.listen(3003, () => {
-    console.log('CONNECTION ESTABLISHED ON PORT 3003')
+app.listen(process.env.PORT || 3003, () => {
+  console.log('CONNECTION ESTABLISHED ON PORT 3003')
 });

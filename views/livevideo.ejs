@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/r1style1.css" />
 <link rel="stylesheet" media="screen and (min-width:601px)" href="css/r2style1.css" />
-<link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style3.css" />
+<link rel="stylesheet" media="screen and (min-width: 1080px)" href="css/style4.css" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,14 +29,34 @@
   <head>
     <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
   </head>
+
+
   <body>
+
+    <nav class="shadow bg-body rounded">
+        <div class="logo">
+            <img id="logo2" class="logo2" src="img/lightmode_logo.png">
+        </div>
+    
+    
+    
+    
+    <div class="button" class="btn-dark btn btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a class="btn-dark btn btn-lg" href="/" role="button">
+            <i class="fab fa-google"></i>
+            SIGN OUT
+        </a>
+    </div>
+</nav>
+<div id="video">
+  
     <video
       id="my-video"
       class="video-js"
       controls
       preload="auto"
-      width="640"
-      height="264"
+      width="1000"
+      height="450"
       data-setup="{}"
     >
       <source
@@ -51,6 +71,31 @@
         >
       </p>
     </video>
+
+</div>
+
+    
+
+
+
+    <footer class="shadow foot">
+        <div class="logo">
+            <img class="logo-foot" id="logo-foot" src="img/lightmode_logo.png">
+        </div>
+        <div class="text-foot">Try ChillFlix now</div>
+        <p class="copyright">&copy; copyright 2021 ChillFlix</p>
+        <div class="switch position" >
+            <input  type="checkbox" class="darking" id="checkbox">
+            <label for="checkbox" class="label">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+                <div class="ball"></div>
+            </label>
+        </div>
+    </footer>
+
+    <script src="js/darkmode.js"></script>
+
     <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
     <script>
       videojs.Hls.xhr.beforeRequest = (options) => {
@@ -62,23 +107,6 @@
       };
     </script>
   </body>
-    
-  <nav class="shadow bg-body rounded">
-    <div class="logo">
-        <img id="logo2" class="logo2" src="img/lightmode_logo.png">
-    </div>
 
 
-
-
-<div class="button" class="btn-dark btn btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <a class="btn-dark btn btn-lg" href="/" role="button">
-        <i class="fab fa-google"></i>
-        SIGN OUT
-    </a>
-</div>
-
-
-
-</nav>
 </html>

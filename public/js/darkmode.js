@@ -39,9 +39,15 @@ function changing(){
     image.src = "img/Darkmode_logo.png";
     document.getElementById("checkbox").checked = true;
     }
+    
     else if(localStorage.getItem('data-theme')===null)
     {
-        document.getElementById("HTML").setAttribute("data-theme", "light") ;
+        document.getElementById("HTML").setAttribute("data-theme", "dark") ;
+        var image = document.getElementById('logo2');
+    image.src = "img/Darkmode_logo.png";
+    var image = document.getElementById('logo-foot');
+    image.src = "img/Darkmode_logo.png";
+    document.getElementById("checkbox").checked = true;
     }
 }
     
