@@ -148,7 +148,6 @@ request(url, options)
   .then((json) => console.log(json))
   .catch((err) => console.error("error:" + err));
 
-  res.redirect("/main")
 
 
   const url2 = "https://api.zujonow.com/v1/files/?page=1&perPage=20";
@@ -161,7 +160,7 @@ request(url, options)
   request(url2, options2)
     .then((res) => res.json())
     .then((json) => { let url = json.data[0].fileUrl;
-      open(url)})
+      res.redirect(url)})
     .catch((err) => console.error("error:" + err));
  
 });
@@ -190,11 +189,11 @@ app.route("/meet")
   
   request(url, options)
     .then((res) => res.json())
-    .then((json) => openurl.open("http://www.videosdk.live/prebuilt/"+json.meetingId))
+    .then((json) => res.redirect("http://www.videosdk.live/prebuilt/"+json.meetingId))
     .catch((err) => console.error("error:" + err));
     
   
-  res.redirect("/main")
+    
 });
 
 var a;
