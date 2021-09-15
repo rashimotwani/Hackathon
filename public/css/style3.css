@@ -25,6 +25,14 @@ nav{
     fill: var(--clocktext);
     margin: auto ;
 }
+
+.livelogo2{
+    height: 90px;
+    width: 90px;
+    fill: var(--clocktext);
+    margin: auto ;
+    margin-top: 1rem;
+}
 .modal-backdrop {
     position: relative;
     top: 0;
@@ -131,7 +139,7 @@ nav{
 }
 
 .card2{
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 .panel1{
@@ -231,6 +239,14 @@ nav{
     flex-direction:row;
 
 }
+
+.input-group{
+    width: 20rem;
+    margin: auto;
+    text-align: center;
+}
+
+
 
 .ptext{
     display: flex;
