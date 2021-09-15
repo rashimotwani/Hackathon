@@ -176,8 +176,6 @@ app.route("/meet")
   };
   let token = jwt.sign(payload, SECRET_KEY, option);
 
-  console.log(token);
-
   const url = "https://api.zujonow.com/v1/meetings";
 
   var options = {
@@ -190,10 +188,8 @@ app.route("/meet")
   };
   
   request(url, options)
-    .then((res) => {
-      res.json()})
-    .then((json) => {
-      console.log(json)})
+    .then((res) => res.json())
+    .then((json) => open("http://www.videosdk.live/prebuilt/"+json.meetingId))
     .catch((err) => console.error("error:" + err));
     
   
@@ -210,28 +206,35 @@ app.route("/livestream")
   };
   let token = jwt.sign(payload, SECRET_KEY, option);
 
-  console.log(token);
+  const url = "https://api.zujonow.com/v1/livestreams";
+var options = {
+  method: "POST",
+  headers: {
+    Authorization: `${token}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Nickname for livestream", record: true,
+    restream: [
+      {
+          "url": "rtmp://x.rtmp.youtube.com/live2",
+          "streamKey": "0tjp-h6a2-8c9d-vusv-01uu"
+      }
+    ]
+    }),
+};
 
-  const url = "https://api.zujonow.com/v1/meetings";
+request(url, options)
+  .then((res) => res.json())
+  .then((json) => {
+    console.log(json.upstreamUrl);
+    console.log(json.streamKey)
+  })
+  .catch((err) => console.error("error:" + err));
 
-  var options = {
-    method: "POST",
-    headers: {
-      Authorization: `${token}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  };
   
-  request(url, options)
-    .then((res) => {
-      res.json()})
-    .then((json) => {
-      console.log(json)})
-    .catch((err) => console.error("error:" + err));
-    
-  
-  res.redirect("/main")
+  res.render("livestream")
 });
 
 
