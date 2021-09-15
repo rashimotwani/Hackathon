@@ -291,6 +291,14 @@ footer{
     color: var(--copyright);
 }
 
+.slide{
+    z-index: 10;
+}
+ 
+nav{
+    z-index:10000;
+}
+
 :root{
     --black: #000000;
     --white: #ffffff;
