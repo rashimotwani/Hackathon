@@ -14,6 +14,7 @@ The link for the website: https://chillflix-india.herokuapp.com/
 - MongoDB
 - Express
 - PassportJS
+- VideoSDK API
   
   
 ## Creators
