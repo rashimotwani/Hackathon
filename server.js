@@ -72,7 +72,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "https://chillflix-india.herokuapp.com/auth/google/chillflix",
-    // callbackURL: "http://localhost:3003/auth/google/chillflix",
+    //  callbackURL: "http://localhost:3003/auth/google/chillflix",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -132,7 +132,7 @@ app.route("/video")
 
 
 const formData = new FormData();
-formData.append("file", fs.createReadStream("mock-video.mp4"));
+formData.append("file", fs.createReadStream("hello.mp4"));
 
 const url = "https://storage-api.zujonow.com/v1/files";
 var options = {
@@ -159,11 +159,12 @@ request(url, options)
   
   request(url2, options2)
     .then((res) => res.json())
-    .then((json) => { let url = json.data[0].fileUrl;
+    .then((json) => {
+       let url = json.data[0].fileUrl;
+       console.log(url)
       res.redirect(url)})
     .catch((err) => console.error("error:" + err));
 
-  res.redirect("/main")
  
 });
 
