@@ -29,3 +29,11 @@ The link for the website: https://chillflix-india.herokuapp.com/
 
 Complete Demonstration of ChillFlix: 
 https://www.youtube.com/watch?v=4mw1qQ_eJ9Y
+
+
+## Screenshots
+![Screenshot (255)](https://user-images.githubusercontent.com/85797179/143669821-d758c1fd-8b7d-4911-9fd1-f829ef13036d.png)
+![Screenshot (256)](https://user-images.githubusercontent.com/85797179/143669823-fb0de869-2f23-49b1-b120-6b3f82f0b0c4.png)
+![Screenshot (257)](https://user-images.githubusercontent.com/85797179/143669837-b8aa007b-996d-4461-b34a-784d68cfcd9c.png)
+![Screenshot (258)](https://user-images.githubusercontent.com/85797179/143669838-827e1bd1-2997-4431-94a1-d7d32a6caa0f.png)
+![Screenshot (259)](https://user-images.githubusercontent.com/85797179/143669841-f16b4e28-dc28-4855-b5cf-9b9d21f10f54.png)
